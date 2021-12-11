@@ -64,7 +64,7 @@ public:
     }
  
     // конструктор с двумя параметрами
-    Matrix(size_t n, size_t m) : mx(nullptr), rows(0), cols(0)
+    Matrix(size_t n, size_t m) : mx(nullptr), rows(0), cols(0) //если передать очень большой размер будет стэк оверфлоу, исправление - перед креейт сделать проверку чисел 
     {
         create(n, m);
     }
@@ -224,6 +224,10 @@ public:
 int main()
 {
     try {
+        char name[100]; //уязвимость форматной строки, при вводе пользавтелем модификатора форматной строки, он может получиться доступ к адресному пространству программы 
+        printf("Please enter your name");
+        gets(name);
+        printf("Hello, %s.it's a matrix calculator", name)
         Matrix mx1; // определяем экземпляр класса
         mx1.SetMatrix(); //обращаемся к методу матрицы (через точку)
         mx1.PrintMatrix("matrix 1");
